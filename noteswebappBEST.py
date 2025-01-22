@@ -3,10 +3,13 @@ from flask_pymongo import PyMongo
 from bson import ObjectId
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "your_secret_key"  # Replace with a secure key
-app.config["MONGO_URI"] = "mongodb+srv://syahra2014:Y8UFji2FSqvhqh76@notes.lxzw2.mongodb.net/Notesapp?retryWrites=true&w=majority"
+load_dotenv()
+app.config["MONGO_URI"] = os.getenv("MONGO_URI")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 # Initialize extensions
 mongo = PyMongo(app)
